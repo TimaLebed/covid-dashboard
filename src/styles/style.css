@@ -1,0 +1,91 @@
+@import "bootstrap.min.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  /* overflow-x: hidden; */
+  min-height: 100vh;
+}
+
+a {
+  color: #35c682;
+  transition: 0.25s all;
+}
+
+a:hover {
+  color: #26313c;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+h1 {
+  text-align: center;
+  padding: 30px;
+}
+
+.hidden {
+  display: none;
+}
+
+a.td-u {
+  position: relative;
+  font-weight: 600;
+}
+
+a.td-u::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  background-color: #26313c;
+  transition: width 0.25s;
+}
+
+a.td-u:hover:after {
+  width: 100%;
+}
+
+/* Main */
+.table-wrapper,
+.map-wrapper,
+.list-wrapper,
+.graph-wrapper {
+  border: 2px solid #35c682;
+  border-radius: 5px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 30px 0;
+}
+
+footer .row {
+  align-items: center;
+  justify-content: center;
+}
+
+footer .year {
+  font-weight: 600;
+}
+
+footer img {
+  width: 100%;
+  max-width: 100px;
+  transition: transform 0.25s;
+}
+
+footer img:hover {
+  transform: scale(1.15);
+}
