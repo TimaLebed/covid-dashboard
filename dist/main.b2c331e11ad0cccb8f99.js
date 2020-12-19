@@ -87,7 +87,7 @@ eval("\n\nvar isOldIE = function isOldIE() {\n  var memo;\n  return function mem
 /*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/style.css */ \"./src/styles/style.css\");\n;\n\n\n//# sourceURL=webpack://gem-puzzle/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/style.css */ \"./src/styles/style.css\");\n;\n\nfetch(\n  'https://api-maps.yandex.ru/2.1?apikey=82d09443-b436-46c9-aa64-d5e8a5310526&lang=ru_RU',\n).then((response) => response.json());\n\n\n//# sourceURL=webpack://gem-puzzle/./src/index.js?");
 
 /***/ })
 
