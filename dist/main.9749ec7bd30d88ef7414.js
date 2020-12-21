@@ -78,6 +78,20 @@ eval("\n\nvar isOldIE = function isOldIE() {\n  var memo;\n  return function mem
 
 /***/ }),
 
+/***/ "./node_modules/ymaps/dist/ymaps.esm.js":
+/*!**********************************************!*\
+  !*** ./node_modules/ymaps/dist/ymaps.esm.js ***!
+  \**********************************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nvar ymaps$1 = {\n  load: function load() {\n    var src = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '//api-maps.yandex.ru/2.1/?lang=en_RU';\n\n    var getNsParamValue = function getNsParamValue() {\n      var results = src.match(/[\\\\?&]ns=([^&#]*)/);\n      return results === null ? '' : decodeURIComponent(results[1].replace(/\\+/g, ' '));\n    };\n\n    if (!this.promise) {\n      this.promise = new Promise(function (resolve, reject) {\n        var scriptElement = document.createElement('script');\n        scriptElement.onload = resolve;\n        scriptElement.onerror = reject;\n        scriptElement.type = 'text/javascript';\n        scriptElement.src = src;\n        document.body.appendChild(scriptElement);\n      }).then(function () {\n        var ns = getNsParamValue();\n\n        if (ns && ns !== 'ymaps') {\n          (0, eval)(\"var ymaps = \".concat(ns, \";\"));\n        }\n\n        return new Promise(function (resolve) {\n          return ymaps.ready(resolve);\n        });\n      });\n    }\n\n    return this.promise;\n  }\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ymaps$1);\n\n\n//# sourceURL=webpack://gem-puzzle/./node_modules/ymaps/dist/ymaps.esm.js?");
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -87,7 +101,7 @@ eval("\n\nvar isOldIE = function isOldIE() {\n  var memo;\n  return function mem
 /*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/style.css */ \"./src/styles/style.css\");\n;\n\nfetch(\n  'https://api-maps.yandex.ru/2.1?apikey=82d09443-b436-46c9-aa64-d5e8a5310526&lang=ru_RU',\n).then((response) => response.json());\n\n\n//# sourceURL=webpack://gem-puzzle/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/style.css */ \"./src/styles/style.css\");\n/* harmony import */ var ymaps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ymaps */ \"./node_modules/ymaps/dist/ymaps.esm.js\");\n;\n\n\nymaps__WEBPACK_IMPORTED_MODULE_1__.default.load('https://api-maps.yandex.ru/2.1/?lang=ru_RU').then((maps) => {\n  const mapOptions = {\n    center: [54.299638, 26.880958],\n    zoom: 1,\n    controls: ['zoomControl'],\n  };\n\n  const mapRestrict = {\n    restrictMapArea: false,\n  };\n\n  mapOptions.behaviors = window.innerWidth < 768 ? ['multiTouch'] : ['drag'];\n\n  const map = new maps.Map('map', mapOptions, mapRestrict);\n\n  //   const pane = new maps.pane.StaticPane(map, {\n  //     zIndex: 100,\n  //     css: {\n  //       width: '100%',\n  //       height: '100%',\n  //       backgroundColor: '#f7f7f7',\n  //     },\n  //   });\n  //   map.panes.append('white', pane);\n\n  maps.borders.load('001').then((geojson) => {\n    for (let i = 0; i < geojson.features.length; i++) {\n      const geoObject = new maps.GeoObject(geojson.features[i], {\n        fillColor: '35c682',\n        strokeColor: '26313c',\n        strokeOpacity: 0.75,\n        fillOpacity: 0.75,\n      });\n      map.geoObjects.add(geoObject);\n    }\n  });\n});\n\n\n//# sourceURL=webpack://gem-puzzle/./src/index.js?");
 
 /***/ })
 

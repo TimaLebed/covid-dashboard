@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
-    "postcss-js": "^3.0.3"
+    "postcss-js": "^3.0.3",
+    "ymaps": "^0.2.1"
   }
 }
