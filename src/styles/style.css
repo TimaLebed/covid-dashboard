@@ -207,6 +207,19 @@ a.td-u:hover:after {
   background-position: center;
 }
 
+/* Table */
+.table-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.table-section {
+  flex: 0 0 33.3%;
+  height: 75px;
+  text-align: center;
+}
+
 /* Footer */
 footer {
   text-align: center;
