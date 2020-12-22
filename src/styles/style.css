@@ -80,83 +80,84 @@ a.td-u:hover:after {
 
 .switch-day,
 .switch-people {
-	position: relative;
-	width: 110px;
-	height: 40px;
-	border-radius: 25px;
+  position: relative;
+  width: 110px;
+  height: 40px;
+  border-radius: 25px;
 }
 
-.checkbox-day,
-.checkbox-people {
-	visibility: hidden;
+.switch-people,
+.switch-day {
+  background: #e17055;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  color: white;
+  z-index: 1;
+  text-transform: uppercase;
+  top: 0;
+  cursor: pointer;
 }
 
-.checkbox-label {
-	display: block;
-	z-index: 1;
-	position: absolute;
-	width: 38px;
-	height: 38px;
-	top: 1px;
-	right: 1px;
-	background: white;
-	border-radius: 50%;
-	border: 1px solid #F6F5FA;
-	box-sizing: border-box;
-	box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.38);
-	transition: all 0.2s ease;
-	cursor: pointer;
+.switch-people.none,
+.switch-day.none {
+  background: #6c5ce7;
 }
 
-.checkbox-people:checked + .checkbox-label {
-	right: 71px;
+.switch-people::after,
+.switch-day::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  display: block;
+  width: 38px;
+  height: 38px;
+  background: white;
+  border-radius: 50%;
+  border: 1px solid #f6f5fa;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.38);
+  transition: all 0.2s ease;
+  z-index: 1;
 }
 
-.checkbox-day:checked + .checkbox-label {
-	right: 71px;
+.switch-people:not(.none)::after,
+.switch-day:not(.none)::after {
+  left: 1px;
 }
 
-.checkbox-people:checked ~ .switch-bg {
-	background-color: #6c5ce7;
+.switch-people.none::after,
+.switch-day.none::after {
+  left: calc(100% - 38px);
 }
 
-.checkbox-day:checked ~ .switch-bg {
-	background-color: #6c5ce7;
+.switch-people > div,
+.switch-day > div {
+  width: 100%;
+  height: 100%;
+  padding: 13px 0;
+  line-height: 1;
+  text-align: center;
 }
 
-.today,
-.all-day,
-.billion,
-.thousand {
-	font-weight: bold;
-	font-size: 14px;
-	line-height: 17px;
-	color: white;
-	position: absolute;
-	z-index: 1;
-	text-transform: uppercase;
-	top: 12px;
+.switch-people:not(.none) .switch-billion,
+.switch-day:not(.none) .all-day {
+  padding-left: 30px;
 }
 
-.today,
-.thousand {
-	right: 20px;
+.switch-people.none .switch-thousand,
+.switch-day.none .today {
+  padding-right: 15px;
 }
 
-.switch-bg {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	/* background-color: #973a3a; */
-	background-color: #e17055;
-	box-shadow: inset 0px -1px 1px rgba(255, 255, 255, 0.28), inset 0px 1px 2px rgba(0, 0, 0, 0.25);
-	border-radius: 25px;
+.switch-people:not(.none) .switch-thousand,
+.switch-day:not(.none) .today {
+  display: none;
 }
 
-.none {
-	display: none;
+.switch-people.none .switch-billion,
+.switch-day.none .all-day {
+  display: none;
 }
 
 .list-items {
@@ -179,28 +180,29 @@ a.td-u:hover:after {
   background-color: thistle;
 }
 
+.list-buttons__element.active {
+  background-color: red;
+}
+
 .list__element {
   width: 100%;
   height: auto;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   margin: 5px 0;
   border-bottom: 1px solid black;
 }
 
-.list__element--case {
-  /* margin-left: 20px; */
-}
-
-.list__element--country {
-  /* margin-left: 10px; */
+.list__element > div {
+  width: 33.3%;
+  flex: 0 0 33.3%;
+  text-align: center;
 }
 
 .list__element--img {
   width: 30px;
   height: 30px;
-  /* margin-left: 20px; */
-  background-size: contain;
+  background-size: 35px;
   background-repeat: no-repeat;
   background-position: center;
 }
