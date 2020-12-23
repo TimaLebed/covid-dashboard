@@ -77,10 +77,11 @@ function createMap() {
             },
             properties: {
               hintContent: mapState.data[i].country,
-              balloonContentHeader: `${mapState.data[i].country}: ${
+              balloonContentHeader: `${mapState.data[i].country}:`,
+              balloonContentBody: `${mapState.data[i][state.activeState]}`,
+              balloonContentFooter: `${
                 state.activeState[0].toUpperCase() + state.activeState.slice(1)
               }`,
-              balloonContentBody: `${mapState.data[i][state.activeState]}`,
             },
           },
           {
