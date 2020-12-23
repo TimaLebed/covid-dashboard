@@ -65,6 +65,20 @@ a.td-u:hover:after {
   border-radius: 5px;
 }
 
+.map-wrapper{
+  position: relative;
+}
+
+.map-level{
+  position: absolute;
+  bottom: 40px;
+  left: 10px;
+  width: 200px;
+  height: 15px;
+  background: linear-gradient(90deg, rgba(46,204,113,1) 0%, rgba(231,76,60,1) 100%);
+  z-index: 999;
+}
+
 /* Footer */
 footer {
   text-align: center;

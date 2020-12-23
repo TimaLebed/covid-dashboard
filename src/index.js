@@ -10,79 +10,54 @@ function createList(data) {
     };
 
     const mapRestrict = {
-      restrictMapArea: true,
+      restrictMapArea: false,
     };
 
     mapOptions.behaviors = window.innerWidth < 768 ? ['multiTouch'] : ['drag'];
 
     const map = new maps.Map('map', mapOptions, mapRestrict);
 
-    // const pane = new maps.pane.StaticPane(map, {
-    //   zIndex: 100,
-    //   css: {
-    //     width: '100%',
-    //     height: '100%',
-    //     backgroundColor: '#f7f7f7',
-    //   },
-    // });
-    // map.panes.append('white', pane);
+    const counriesColor = [
+      '3598DB',
+      '5393CB',
+      '688FC1',
+      '8A8AB0',
+      '9488AB',
+      'FF7477',
+      'FF6F7D',
+      'e74c3c',
+      'C0392B',
+    ];
 
-    console.log(data);
+    const arrAll = data.sort((a, b) => b.deaths - a.deaths);
+    const lll = [...Array(counriesColor.length).keys()].map(
+      (_, i) => Math.floor(arrAll[0].deaths / counriesColor.length) * i,
+    );
 
-    for (let i = 0; i < data.length; i++) {
-      const myCircle = new maps.Circle([
-        // Координаты центра круга.
-        [data[i].countryInfo.lat, data[i].countryInfo.long],
-        // Радиус круга в метрах.
-        10000,
-      ], {
-        // Описываем свойства круга.
-        // Содержимое балуна.
-        balloonContent: `death - ${data[i].deaths}`,
-        // Содержимое хинта.
-        hintContent: 'Подвинь меня',
-      }, {
-        // Задаем опции круга.
-        // Включаем возможность перетаскивания круга.
-        draggable: false,
-        // Цвет заливки.
-        // Последний байт (77) определяет прозрачность.
-        // Прозрачность заливки также можно задать используя опцию "fillOpacity".
-        fillColor: '#DB709377',
-        // Цвет обводки.
-        strokeColor: '#990066',
-        // Прозрачность обводки.
-        strokeOpacity: 0.8,
-        // Ширина обводки в пикселях.
-        strokeWidth: 5,
-      });
-      map.geoObjects.add(myCircle);
-    }
-    // Добавляем круг на карту.
+    maps.borders.load('001').then((geojson) => {
+      for (let i = 0; i < data.length; i++) {
+        const geoObjItem = geojson.features.find(
+          (item) => item.properties.iso3166 === data[i].countryInfo.iso2,
+        );
 
-    // maps.borders.load('001').then((geojson) => {
-    //   console.log(geojson);
-    //   console.log(data);
+        let fillColor = lll.indexOf(lll.find((x) => data[i].deaths < x));
+        fillColor = fillColor === -1 ? 8 : fillColor;
 
-    //   for (let i = 0; i < data.length; i++) {
-    //     geojson.features.forEach((item) => {
-    //       if (item.properties.iso3166 === data[i].countryInfo.iso2) {
-    //         console.log('test');
-    //         const geoObject = new maps.GeoObject(item, {
-    //           fillColor: '35c682',
-    //           strokeColor: '26313c',
-    //           strokeOpacity: 0.75,
-    //           fillOpacity: 0.75,
-    //         });
-    //         map.geoObjects.add(geoObject);
-    //       }
-    //     });
-    //   }
-    // });
+        const geoObject = new maps.GeoObject(geoObjItem, {
+          fillColor: counriesColor[fillColor],
+          strokeColor: '212529',
+          strokeOpacity: 0.25,
+          hintContent: 'test',
+        });
+        map.geoObjects.add(geoObject);
+      }
+    });
   });
 }
 async function showData() {
-  const responseCountries = await fetch('https://disease.sh/v3/covid-19/countries');
+  const responseCountries = await fetch(
+    'https://disease.sh/v3/covid-19/countries',
+  );
   const data = await responseCountries.json();
   createList(data);
 }
