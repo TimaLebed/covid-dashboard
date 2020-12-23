@@ -17,11 +17,11 @@
           <div class="col-4">
             <div class="list-wrapper">
               <div class="switch-wrapper">
-                <div class="switch switch-people" data-key="isAllDay">
+                <div class="switch switch-people" data-key="isAllPeople">
                   <div class="switch-billion">7.8 bln</div>
                   <div class="switch-thousand">100k</div>
                 </div>
-                <div class="switch switch-day" data-key="isAllPeople">
+                <div class="switch switch-day" data-key="isAllDay">
                   <div class="all-day">all day</div>
                   <div class="today">today</div>
                 </div>
@@ -34,17 +34,18 @@
               </div>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-2">
             <div class="map-wrapper">
               <h2>Map</h2>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-6">
             <div class="table-wrapper">
               <h2>Table</h2>
             </div>
             <div class="graph-wrapper">
-              <h2>Graph</h2>
+              <h2 id="graph-title"></h2>
+              <canvas id="popChart" width="1000" height="600"></canvas>
             </div>
           </div>
         </div>
