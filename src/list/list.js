@@ -7,14 +7,6 @@ const switchButtons = [...document.getElementsByClassName('switch')];
 const PER_ONE_MILLION_STR = 'PerOneMillion';
 const TODAY_STR = 'today';
 
-// const state = {
-//   isAllDay: true,
-//   isAllPeople: true,
-//   isTodayPerPeople: false,
-//   data: [],
-//   activeState: 'cases',
-// };
-
 const valuePerThousand = (el) => Math.round((el[state.activeState] * 10 ** 5) / el.population);
 
 function createList(data) {

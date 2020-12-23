@@ -1,47 +1,81 @@
-// import state from '../global-state';
+import state from '../global-state';
 
 const list = document.getElementById('list-items');
-const tableSections = document.getElementsByClassName('table-section');
+const tableSections = [...document.getElementsByClassName('table-section')];
+const tableReset = document.getElementById('table-reset');
+
+const switchButtons = [...document.getElementsByClassName('switch')];
+
 const tableState = {
   data: [],
-  isListClick: false,
+  dataKeyList: '',
+  arrState: ['cases', 'deaths', 'recovered'],
 };
 
-function generateTableCel(data, property, dataKeyList) {
+const PER_ONE_MILLION_STR = 'PerOneMillion';
+const TODAY_STR = 'today';
+
+const valuePerThousand = (el, prop) => Math.round((el[prop] * 10 ** 5) / el.population);
+
+function generateTableCel(data, property) {
   const tableColumn = document.getElementById(`${property}`);
   const tableValue = document.createElement('span');
-
-  console.log(dataKeyList);
-  console.log(data[0].country);
-  console.log(data[0][property]);
-
+  let variable;
+  let dataItem;
   switch (true) {
-    case tableState.isListClick:
-      tableValue.innerHTML = data.forEach((el) => {
-        // console.log(el[property]);
-        if (el.country === dataKeyList) {
-          return el[property];
-        }
-      });
+    case tableState.dataKeyList.length > 0:
+      dataItem = data.find((el) => el.country === tableState.dataKeyList);
+      switch (true) {
+        case !state.isAllDay && !state.isAllPeople:
+          variable = valuePerThousand(dataItem, property);
+          break;
+        case !state.isAllPeople:
+          variable = Math.round(dataItem[property] / 10);
+          break;
+        default:
+          variable = dataItem[property];
+          break;
+      }
+      tableValue.innerHTML = variable;
       break;
     default:
-      tableValue.innerHTML = data.reduce((sum, current) => sum + current[property], 0);
+      switch (true) {
+        case !state.isAllDay && !state.isAllPeople:
+          variable = data.reduce((sum, current) => {
+            let result;
+            if (current[property]) {
+              result = sum + valuePerThousand(current, property);
+            } else {
+              result = sum + 0;
+            }
+            return result;
+          }, 0);
+          break;
+        case !state.isAllPeople:
+          variable = Math.round(
+            data.reduce((sum, current) => sum + current[property], 0) / 10,
+          );
+          break;
+        default:
+          variable = data.reduce((sum, current) => sum + current[property], 0);
+          break;
+      }
+      tableValue.innerHTML = variable;
       break;
   }
   tableColumn.append(tableValue);
 }
 
-function generateTable(data, dataKeyList) {
-  generateTableCel(data, 'cases', dataKeyList);
-  generateTableCel(data, 'deaths', dataKeyList);
-  generateTableCel(data, 'recovered', dataKeyList);
+function generateTable(data) {
+  tableState.arrState.forEach((element) => generateTableCel(data, element));
 }
 
 async function showData() {
-  const responseCountries = await fetch('https://disease.sh/v3/covid-19/countries');
+  const responseCountries = await fetch(
+    'https://disease.sh/v3/covid-19/countries',
+  );
   tableState.data = await responseCountries.json();
   generateTable(tableState.data);
-  console.log(tableState.data);
 }
 
 showData();
@@ -51,17 +85,46 @@ const removeTableItems = () => [...tableSections].forEach((el) => {
 });
 
 function listEvent(event) {
-  tableState.isListClick = true;
   const { target } = event;
   const listElement = target.closest('.list__element');
   const dataKey = listElement.getAttribute('data-key');
 
   removeTableItems();
-  generateTable(tableState.data, dataKey);
-  // console.log(dataKey);
-  console.log(tableState.data);
+  tableState.dataKeyList = dataKey;
+  generateTable(tableState.data);
+}
 
-  tableState.isListClick = false;
+function resetEvent() {
+  removeTableItems();
+  tableState.dataKeyList = '';
+  generateTable(tableState.data);
+}
+
+const switchState = (currentState) => {
+  let result = currentState.replace(PER_ONE_MILLION_STR, '');
+  result = result.replace(TODAY_STR, '');
+  result = result.toLowerCase();
+  switch (true) {
+    case !state.isAllPeople && state.isAllDay:
+      result += PER_ONE_MILLION_STR;
+      break;
+    case (state.isAllPeople && !state.isAllDay)
+      || (!state.isAllPeople && !state.isAllDay):
+      result = TODAY_STR + result[0].toUpperCase() + result.slice(1);
+      break;
+    default:
+      break;
+  }
+  return result;
+};
+
+function changeSwitch() {
+  removeTableItems();
+  tableState.arrState = tableState.arrState.map((elem) => switchState(elem));
+  tableSections.forEach((elem, index) => elem.setAttribute('id', tableState.arrState[index]));
+  generateTable(tableState.data);
 }
 
 list.addEventListener('click', listEvent);
+tableReset.addEventListener('click', resetEvent);
+switchButtons.forEach((button) => button.addEventListener('click', changeSwitch));
