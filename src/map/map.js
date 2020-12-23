@@ -18,7 +18,7 @@ function createMap() {
   ymaps.load().then((maps) => {
     const mapOptions = {
       center: [15.489579, 32.581527],
-      zoom: 1,
+      zoom: 3,
       controls: ['zoomControl'],
     };
 

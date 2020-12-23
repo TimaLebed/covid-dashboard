@@ -7,13 +7,19 @@
   outline: none !important;
 }
 
+button,
+button:active,
+button:focus {
+  outline: none;
+}
+
 body {
   /* overflow-x: hidden; */
   min-height: 100vh;
 }
 
 a {
-  color: #35c682;
+  color: #e17055;
   transition: 0.25s all;
 }
 
@@ -29,6 +35,11 @@ ul {
 h1 {
   text-align: center;
   padding: 30px;
+}
+
+h5 {
+  font-size: 15px;
+  margin: 15px auto;
 }
 
 .hidden {
@@ -56,13 +67,37 @@ a.td-u:hover:after {
   width: 100%;
 }
 
+.btn {
+  margin: auto;
+  color: #fff;
+  background: rgba(38, 49, 60, 1);
+  font-weight: bold;
+  padding: 5px 15px;
+  border-radius: 50px;
+  transition: 0.25s all;
+  border: 2px solid rgba(255, 255, 255, 1);
+  margin: 20px auto;
+}
+
+.btn:hover {
+  background: #e17055;
+  color: #fff;
+  border: 2px solid rgba(38, 49, 60, 1);
+}
+
+.row {
+  margin: 0;
+}
+.row > div {
+  padding: 0;
+}
+
 /* Main */
 .table-wrapper,
 .map-wrapper,
 .list-wrapper,
 .graph-wrapper {
-  border: 2px solid #35c682;
-  border-radius: 5px;
+  border: 2px solid #26313c;
 }
 
 .map-wrapper {
@@ -98,10 +133,10 @@ a.td-u:hover:after {
 }
 
 .list-wrapper {
-  /* width: 300px; */
   height: auto;
   width: 100%;
-  background-color: aliceblue;
+  background: #26313c;
+  color: #fff;
 }
 
 .switch-wrapper {
@@ -113,8 +148,8 @@ a.td-u:hover:after {
 .switch-day,
 .switch-people {
   position: relative;
-  width: 110px;
-  height: 40px;
+  width: 100px;
+  height: 30px;
   border-radius: 25px;
 }
 
@@ -122,15 +157,21 @@ a.td-u:hover:after {
 .switch-day {
   background: #e17055;
   font-weight: bold;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 13px;
+  line-height: 1;
   color: white;
   z-index: 1;
   text-transform: uppercase;
-  top: 0;
+  top: 10px;
   cursor: pointer;
 }
+.switch-people {
+  left: 10px;
+}
 
+.switch-day {
+  right: 10px;
+}
 .switch-people.none,
 .switch-day.none {
   background: #6c5ce7;
@@ -140,10 +181,10 @@ a.td-u:hover:after {
 .switch-day::after {
   content: '';
   position: absolute;
-  top: 1px;
+  top: 0;
   display: block;
-  width: 38px;
-  height: 38px;
+  width: 30px;
+  height: 30px;
   background: white;
   border-radius: 50%;
   border: 1px solid #f6f5fa;
@@ -155,26 +196,26 @@ a.td-u:hover:after {
 
 .switch-people:not(.none)::after,
 .switch-day:not(.none)::after {
-  left: 1px;
+  left: 0;
 }
 
 .switch-people.none::after,
 .switch-day.none::after {
-  left: calc(100% - 38px);
+  left: calc(100% - 30px);
 }
 
 .switch-people > div,
 .switch-day > div {
   width: 100%;
   height: 100%;
-  padding: 13px 0;
+  padding: 8px 0;
   line-height: 1;
   text-align: center;
 }
 
 .switch-people:not(.none) .switch-billion,
 .switch-day:not(.none) .all-day {
-  padding-left: 30px;
+  padding-left: 25px;
 }
 
 .switch-people.none .switch-thousand,
@@ -194,35 +235,43 @@ a.td-u:hover:after {
 
 .list-items {
   overflow: auto;
-  height: 600px;
+  height: 283px;
   min-width: 170px;
-  margin-top: 10px;
+  margin-top: 20px;
+  border-top: 2px solid #26313c;
+  border-bottom: 2px solid #26313c;
 }
 
 .list-buttons {
   display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+  justify-content: center;
+  margin: 12px auto;
 }
 
 .list-buttons__element {
-  border: 0;
-  padding: 10px;
-  border-radius: 20px;
-  background-color: thistle;
+  font-size: 13px;
+  margin: 5px auto;
 }
 
 .list-buttons__element.active {
-  background-color: red;
+  background: #e17055;
+  border: #e17055;
+  color: #fff !important;
 }
 
 .list__element {
   width: 100%;
   height: auto;
   display: flex;
-  /* justify-content: space-around; */
   margin: 5px 0;
-  border-bottom: 1px solid black;
+  padding: 5px 0;
+  border-bottom: 1px solid #26313c;
+  cursor: pointer;
+  transition: 0.25s all;
+}
+
+.list__element:hover {
+  background: #e17055;
 }
 
 .list__element > div {
@@ -244,12 +293,23 @@ a.td-u:hover:after {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  background: #26313c;
+  color: #fff;
 }
 
 .table-section {
   flex: 0 0 33.3%;
   height: 75px;
   text-align: center;
+  max-width: 33.3%;
+}
+.graph-wrapper h4 {
+  text-align: center;
+  margin: 15px auto;
+}
+
+.graph-wrapper canvas {
+  margin-bottom: 21px;
 }
 
 /* Footer */
@@ -275,4 +335,54 @@ footer img {
 
 footer img:hover {
   transform: scale(1.15);
+}
+
+@media (max-width: 1199px) {
+  h1 {
+    padding: 15px;
+    font-size: 30px;
+  }
+  .btn {
+    padding: 5px 10px;
+  }
+  .graph-wrapper {
+    height: 247px;
+  }
+}
+
+@media (max-width: 992px) {
+  .graph-wrapper {
+    height: auto;
+  }
+
+  .switch-people {
+    left: 50px;
+  }
+  .switch-day {
+    right: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  #map {
+    height: 300px !important;
+  }
+  .switch-people {
+    left: 25px;
+  }
+  .switch-day {
+    right: 25px;
+  }
+}
+
+@media (max-width: 400px) {
+  #map {
+    height: 250px !important;
+  }
+  .switch-people {
+    left: 10px;
+  }
+  .switch-day {
+    right: 10px;
+  }
 }
