@@ -1,22 +1,16 @@
+import state from '../global-state';
+
 const list = document.querySelector('.list-items');
 const listButtons = [...document.getElementsByClassName('list-buttons__element')];
 const switchButtons = [...document.getElementsByClassName('switch')];
-
 const PER_ONE_MILLION_STR = 'PerOneMillion';
 const TODAY_STR = 'today';
-
-const state = {
-  isAllDay: true,
-  isAllPeople: true,
-  isTodayPerPeople: false,
-  data: [],
-  activeState: 'cases',
-};
 
 const valuePerThousand = (el) => Math.round((el[state.activeState] * 10 ** 5) / el.population);
 
 function createList(data) {
   let dataSort = [];
+
   if (!state.isAllDay && !state.isAllPeople) {
     dataSort = data.sort((a, b) => valuePerThousand(b) - valuePerThousand(a));
   } else {
@@ -38,7 +32,8 @@ function createList(data) {
     }
 
     const listElement = document.createElement('div');
-    listElement.className = 'list__element';
+    listElement.classList.add('list__element');
+    listElement.setAttribute('data-key', `${el.country}`);
     listElement.innerHTML = `
       <div>${listElementCase}</div>
       <div>${el.country}</div>
