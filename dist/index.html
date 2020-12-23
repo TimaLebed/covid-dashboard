@@ -15,34 +15,49 @@
       <div class="container">
         <div class="row">
           <div class="col-4">
-            <div class="table-wrapper">
-              <h2>Table</h2>
+            <div class="list-wrapper">
+              <div class="switch-wrapper">
+                <div class="switch switch-people" data-key="isAllPeople">
+                  <div class="switch-billion">7.8 bln</div>
+                  <div class="switch-thousand">100k</div>
+                </div>
+                <div class="switch switch-day" data-key="isAllDay">
+                  <div class="all-day">all day</div>
+                  <div class="today">today</div>
+                </div>
+              </div>
+              <div class="list-items" id="list-items"></div>
+              <div class="list-buttons">
+                <button class="list-buttons__element active" data-key="cases">Cases</button>
+                <button class="list-buttons__element" data-key="deaths">Deaths</button>
+                <button class="list-buttons__element" data-key="recovered">Recovered</button>
+              </div>
             </div>
           </div>
-          <div class="col-8">
+          <div class="col-5">
             <div class="map-wrapper">
               <div id="map" style="width: 100%; height: 400px"></div>
               <div class="map-level"><span class="min">MIN</span><span class="max">MAX</span></div>
             </div>
           </div>
           <div class="col-3">
-            <div class="list-wrapper">
-              <div class="list-buttons">
-                <button class="list-buttons__element active" data-key="cases">
-                  Cases
-                </button>
-                <button class="list-buttons__element" data-key="deaths">
-                  Deaths
-                </button>
-                <button class="list-buttons__element" data-key="recovered">
-                  Recovered
-                </button>
+            <div class="table-wrapper">
+              <button id="table-reset" data-key="default">Reset</button>
+              <div class="table-section" id='cases'>
+                <h5>Cases</h5>
+              </div>
+              <div class="table-section" id='deaths'>
+                <h5>Deaths</h5>
+              </div>
+              <div class="table-section" id='recovered'>
+                <h5>Recovered</h5>
               </div>
             </div>
           </div>
           <div class="col-4">
             <div class="graph-wrapper">
-              <h2>Graph</h2>
+              <h2 id="graph-title"></h2>
+              <canvas id="popChart" width="1000" height="600"></canvas>
             </div>
           </div>
         </div>
@@ -78,5 +93,5 @@
         </div>
       </div>
     </footer>
-  <script src="main.d641a3f400f718af589f.js"></script></body>
+  <script src="main.d2a97d7eb0da90f4e19b.js"></script></body>
 </html>
