@@ -1,4 +1,4 @@
-@import "bootstrap.min.css";
+@import 'bootstrap.min.css';
 
 * {
   margin: 0;
@@ -41,7 +41,7 @@ a.td-u {
 }
 
 a.td-u::after {
-  content: "";
+  content: '';
   display: block;
   width: 0;
   height: 2px;
@@ -65,18 +65,36 @@ a.td-u:hover:after {
   border-radius: 5px;
 }
 
-.map-wrapper{
+.map-wrapper {
   position: relative;
 }
 
-.map-level{
+.map-level {
   position: absolute;
   bottom: 40px;
   left: 10px;
   width: 200px;
   height: 15px;
-  background: linear-gradient(90deg, rgba(53,152,219,1) 0%, rgba(192,57,43,1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(53, 152, 219, 1) 0%,
+    rgba(192, 57, 43, 1) 100%
+  );
   z-index: 999;
+}
+
+.map-level span {
+  position: absolute;
+  bottom: 15px;
+  font-weight: 600;
+}
+
+.map-level .min {
+  left: 0;
+}
+
+.map-level .max {
+  right: 0;
 }
 
 /* Footer */

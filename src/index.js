@@ -4,6 +4,7 @@ import ymaps from 'ymaps';
 const listButtons = [
   ...document.getElementsByClassName('list-buttons__element'),
 ];
+
 const state = {
   isAllDay: true,
   isAllPeople: true,
@@ -14,7 +15,6 @@ const state = {
 
 function createMap() {
   const oldMap = document.querySelector('#map > ymaps');
-  // console.log(oldMap);
   if (oldMap) {
     oldMap.remove();
   }
@@ -81,7 +81,9 @@ function createMap() {
             },
             properties: {
               hintContent: state.data[i].country,
-              balloonContentHeader: `${state.data[i].country}: ${state.activeState[0].toUpperCase() + state.activeState.slice(1)}`,
+              balloonContentHeader: `${state.data[i].country}: ${
+                state.activeState[0].toUpperCase() + state.activeState.slice(1)
+              }`,
               balloonContentBody: `${state.data[i][state.activeState]}`,
             },
           },
