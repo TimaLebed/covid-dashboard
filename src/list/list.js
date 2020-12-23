@@ -1,6 +1,6 @@
 import state from '../global-state';
 
-const list = document.querySelector('.list-items');
+const list = document.getElementById('list-items');
 const listButtons = [...document.getElementsByClassName('list-buttons__element')];
 const switchButtons = [...document.getElementsByClassName('switch')];
 const PER_ONE_MILLION_STR = 'PerOneMillion';
