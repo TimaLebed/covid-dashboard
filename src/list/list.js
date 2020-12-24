@@ -10,7 +10,7 @@ class List {
   }
 
   static valuePerThousand(el) {
-    Math.round((el[state.activeState] * 10 ** 5) / el.population);
+    return Math.round((el[state.activeState] * 10 ** 5) / el.population);
   }
 
   createList(data) {
